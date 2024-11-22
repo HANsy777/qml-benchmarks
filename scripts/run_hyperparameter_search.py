@@ -31,7 +31,7 @@ from qml_benchmarks.hyperparameter_settings import hyper_parameter_settings
 
 np.random.seed(42)
 
-logging.info('cpu count:' + str(os.cpu_count()))
+print('cpu count:' + str(os.cpu_count()))
 
 
 if __name__ == "__main__":
@@ -119,14 +119,14 @@ if __name__ == "__main__":
         override = getattr(args, hyperparam)
         if override is not None:
             hyperparam_grid[hyperparam] = override
-    logging.info(
+    print(
         "Running hyperparameter search experiment with the following settings\n"
     )
-    logging.info(args.classifier_name)
-    logging.info(args.dataset_path)
-    logging.info(" ".join(args.hyperparameter_scoring))
-    logging.info(args.hyperparameter_refit)
-    logging.info("Hyperparam grid:"+" ".join([(str(key)+str(":")+str(hyperparam_grid[key])) for key in hyperparam_grid.keys()]))
+    print(args.classifier_name)
+    print(args.dataset_path)
+    print(" ".join(args.hyperparameter_scoring))
+    print(args.hyperparameter_refit)
+    print("Hyperparam grid:"+" ".join([(str(key)+str(":")+str(hyperparam_grid[key])) for key in hyperparam_grid.keys()]))
 
     experiment_path = args.results_path
     results_path = os.path.join(experiment_path, "results")
@@ -190,7 +190,7 @@ if __name__ == "__main__":
             plt.show()
 
     if hasattr(classifier, "n_qubits_"):
-        logging.info(" ".join(["Num qubits", f"{classifier.n_qubits_}"]))
+        print(" ".join(["Num qubits", f"{classifier.n_qubits_}"]))
 
     ###########################################################################
     # Hyperparameter search
@@ -202,8 +202,8 @@ if __name__ == "__main__":
                         n_jobs=1).fit(
         X, y
     )
-    logging.info("Best hyperparams")
-    logging.info(gs.best_params_)
+    print("Best hyperparams")
+    print(gs.best_params_)
 
     df = pd.DataFrame.from_dict(gs.cv_results_)
     df.to_csv(os.path.join(results_path, results_filename_stem + ".csv"))
