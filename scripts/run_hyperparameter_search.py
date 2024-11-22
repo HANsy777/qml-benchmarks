@@ -173,7 +173,7 @@ if __name__ == "__main__":
     classifier.fit(X, y)
     b = time.time()
     acc_train = classifier.score(X, y)
-    logging.info(" ".join(
+    print(" ".join(
         [classifier_name,
         "Dataset path",
         args.dataset_path,
@@ -199,7 +199,7 @@ if __name__ == "__main__":
                         scoring=args.hyperparameter_scoring,
                         refit=args.hyperparameter_refit,
                         verbose=3,
-                        n_jobs=-1).fit(
+                        n_jobs=1).fit(
         X, y
     )
     logging.info("Best hyperparams")
